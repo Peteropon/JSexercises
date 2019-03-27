@@ -1,20 +1,36 @@
-var url = "https://api.exchangeratesapi.io/latest?base=SEK";
+var url = "https://api.exchangeratesapi.io/latest?base=";
 var data;
-const xhr = new XMLHttpRequest;
-var exchangeRates = ['USD', 'EUR', 'GBP', 'NZD'];
+var exchangeRates = ['EUR', 'USD'];
+getData("SEK");
 
-xhr.onreadystatechange = function() {
-  if(xhr.readyState == 4){
-    if (xhr.status == 200) {
-      data = xhr.response;
-      //console.log(data);
-      renderData(data);
+var selector = document.querySelector('select');
+selector.addEventListener('change', function(e) {
+  let countryCode = selector[selector.selectedIndex].value;
+  getData(countryCode);
+})
+
+
+function getData(countryCode) {
+  const xhr = new XMLHttpRequest;
+
+  xhr.onreadystatechange = function() {
+    if(xhr.readyState == 4){
+      if (xhr.status == 200) {
+        data = xhr.response;
+        //console.log(data);
+        renderData(data);
+      }
     }
   }
+  xhr.open("GET", url + countryCode, true);
+  xhr.responseType = "json";
+  xhr.send();
 }
+
 
 function renderData(data) {
   let lista = document.querySelector('ul');
+  lista.innerHTML = "";
 
   exchangeRates.forEach( (rate)=> {
     var listItem = document.createElement('li');
@@ -24,7 +40,3 @@ function renderData(data) {
   } )
 
 }
-
-xhr.open("GET", url, true);
-xhr.responseType = "json";
-xhr.send();
