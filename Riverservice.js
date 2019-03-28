@@ -4,7 +4,7 @@ var riverData;
 
 var btn = document.querySelector("button");
 btn.addEventListener("click", function() {
-  alert("ok so far");
+  alert("The listener is listening");
   getRiverData();
 });
 
@@ -29,23 +29,31 @@ function getRiverData() {
 
   }
 
+function makeList(site) {
+  var innerList = document.createElement("ul");
+  innerList.innerHTML = "";
+  var listItem1 = document.createElement("li");
+  listItem1.innerHTML = "Code: " + site.Code;
+  innerList.appendChild(listItem1);
+  var listItem2 = document.createElement("li");
+  listItem2.innerHTML = "Lat: " + site.Lat;
+  innerList.appendChild(listItem2);
+  var listItem3 = document.createElement("li");
+  listItem3.innerHTML = "Long: " + site.Long;
+  innerList.appendChild(listItem3);
+  //return innerList;
+  var element = document.getElementById('site');
+  element.appendChild(innerList);
+}
+
 function renderData(jsonObject){
   var list = document.querySelector("ol")
   list.innerHTML = "";
   riverData.forEach((site)=> {
-    var listItem1 = document.createElement("li");
-    listItem1.innerHTML = "Code: " + site.Code;
-    list.appendChild(listItem1);
-    var listItem2 = document.createElement("li");
-    listItem2.innerHTML = "Lat: " + site.Lat;
-    list.appendChild(listItem2);
-    var listItem3 = document.createElement("li");
-    listItem3.innerHTML = "Long: " + site.Long;
-    list.appendChild(listItem3);
-
-    //var innerList = document.createElement("ul");
-    //innerList.innerHTML = "";
+    var listItem = document.createElement("li");
+    makeList(site);
+    listItem.innerHTML = document.getElementById("site").innerHTML;
+    list.appendChild(listItem);
     //var innerListItem = document.createElement("li");
-    //innerList.appendChild(innerListItem);
   })
 }
