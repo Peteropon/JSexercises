@@ -1,9 +1,12 @@
 var riverurl = "http://data.goteborg.se/RiverService/v1.1/MeasureSites/72aebae3-c136-4fa3-9df9-596098bf097e?format=json";
 var riverData;
 
-getRiverData();
 
-
+var btn = document.querySelector("button");
+btn.addEventListener("click", function() {
+  alert("ok so far");
+  //getRiverData();
+});
 
 function getRiverData() {
 
@@ -23,7 +26,7 @@ function getRiverData() {
   xhRequest.responseType = "json";
   xhRequest.send();
 
-    }
+  }
 
-
-//renderData(data);
+//renderData(jsonObject){
+//}
