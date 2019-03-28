@@ -5,7 +5,7 @@ var riverData;
 var btn = document.querySelector("button");
 btn.addEventListener("click", function() {
   alert("ok so far");
-  //getRiverData();
+  getRiverData();
 });
 
 function getRiverData() {
@@ -17,6 +17,7 @@ function getRiverData() {
           if (xhRequest.status == 200) {
               riverData = xhRequest.response;
               console.log(xhRequest.status);
+              renderData(riverData);
           }
       }
   }
@@ -28,5 +29,23 @@ function getRiverData() {
 
   }
 
-//renderData(jsonObject){
-//}
+function renderData(jsonObject){
+  var list = document.querySelector("ol")
+  list.innerHTML = "";
+  riverData.forEach((site)=> {
+    var listItem1 = document.createElement("li");
+    listItem1.innerHTML = "Code: " + site.Code;
+    list.appendChild(listItem1);
+    var listItem2 = document.createElement("li");
+    listItem2.innerHTML = "Lat: " + site.Lat;
+    list.appendChild(listItem2);
+    var listItem3 = document.createElement("li");
+    listItem3.innerHTML = "Long: " + site.Long;
+    list.appendChild(listItem3);
+
+    //var innerList = document.createElement("ul");
+    //innerList.innerHTML = "";
+    //var innerListItem = document.createElement("li");
+    //innerList.appendChild(innerListItem);
+  })
+}
