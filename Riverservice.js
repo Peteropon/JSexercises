@@ -1,10 +1,8 @@
 var riverurl = "http://data.goteborg.se/RiverService/v1.1/MeasureSites/72aebae3-c136-4fa3-9df9-596098bf097e?format=json";
 var riverData;
 
-
 var btn = document.querySelector("button");
 btn.addEventListener("click", function() {
-  alert("The listener is listening");
   getRiverData();
 });
 
@@ -51,8 +49,6 @@ function makeList(site) {
     let meas = document.createElement("p");
     meas.innerText = object.Code + ": " + object.CurrentValue;
     mDiv.appendChild(meas);
-    //mDiv.appendChild(mDivList);
-
   })
   divItem.appendChild(mDiv);
   innerList.appendChild(divItem);
