@@ -16,6 +16,7 @@ function getRiverData() {
       if (xhRequest.readyState == 4) {
           if (xhRequest.status == 200) {
               riverData = xhRequest.response;
+              //measureParam = riverData.MeasureParameters;
               console.log(xhRequest.status);
               renderData(riverData);
           }
@@ -33,7 +34,7 @@ function makeList(site) {
   var innerList = document.createElement("ul");
   innerList.innerHTML = "";
   var listItem1 = document.createElement("li");
-  listItem1.innerHTML = "Code: " + site.Code;
+  listItem1.innerHTML = "Name of site: " + site.Code;
   innerList.appendChild(listItem1);
   var listItem2 = document.createElement("li");
   listItem2.innerHTML = "Lat: " + site.Lat;
@@ -41,8 +42,22 @@ function makeList(site) {
   var listItem3 = document.createElement("li");
   listItem3.innerHTML = "Long: " + site.Long;
   innerList.appendChild(listItem3);
-  //return innerList;
+  var divItem = document.createElement("div");
+  divItem.innerText = "Measurements: ";
+  let mList = document.createElement("ul");
+  mList.innerHTML = "";
+  var mDiv = document.createElement("div");
+  site.MeasureParameters.forEach( (object) => {
+    let meas = document.createElement("p");
+    meas.innerText = object.Code + ": " + object.CurrentValue;
+    mDiv.appendChild(meas);
+    //mDiv.appendChild(mDivList);
+
+  })
+  divItem.appendChild(mDiv);
+  innerList.appendChild(divItem);
   var element = document.getElementById('site');
+  element.innerHTML = "";
   element.appendChild(innerList);
 }
 
